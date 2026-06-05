@@ -1,9 +1,11 @@
 
 import express from 'express';
 import { getAllTasks, createTask } from './services/task.service';
+import { title } from 'node:process';
 
 // Cria aplicação
 const app = express();
+app.use(express.json());
 // Define a porta
 const PORT = 3000;
 
@@ -15,6 +17,14 @@ app.get('/', (req, res) => {
 app.get('/tasks', (req, res) => {
     const tasks = getAllTasks();
     res.json(tasks);
+})
+
+app.post('/tasks', (req, res) => {
+    const task = createTask(
+        req.body.title,
+        req.body.description
+    );
+    res.json(task);
 })
 
 // Inicia o servidor
