@@ -27,6 +27,8 @@ tasks.push(newTask);
 
 };
 
+export { getAllTasks,  createTask };
+
 
 
 

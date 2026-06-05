@@ -1,5 +1,6 @@
-// Importa o Express
+
 import express from 'express';
+import { getAllTasks, createTask } from './services/task.service';
 
 // Cria aplicação
 const app = express();
@@ -10,6 +11,11 @@ const PORT = 3000;
 app.get('/', (req, res) => {
     res.json({ message: 'Task Manager API'});
 });
+
+app.get('/tasks', (req, res) => {
+    const tasks = getAllTasks();
+    res.json(tasks);
+})
 
 // Inicia o servidor
 app.listen(PORT, () => {
