@@ -48,6 +48,14 @@ const getTaskById = (id: number) => {
     return tasks.find(task => task.id === id)
 }
 
+/**
+ * Atualiza uma tarefa existente.
+ *
+ * @param id ID da tarefa.
+ * @param title Novo título.
+ * @param description Nova descrição.
+ * @returns A tarefa atualizada ou undefined caso não exista.
+ */
 const updateTask = (
     id: number,
     title: string,
