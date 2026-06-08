@@ -6,6 +6,8 @@ REST API for task management built with Node.js, Express and TypeScript. This pr
 
 * Create tasks
 * List all tasks
+* Get task by ID
+* Update tasks
 
 ## Available Endpoints
 
