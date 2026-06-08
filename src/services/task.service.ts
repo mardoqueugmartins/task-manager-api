@@ -1,14 +1,27 @@
 import type { Task } from '../models/task.model';
 
-// Armazena as tarefas em memórias
+/**
+ * Armazena temporariamente as tarefas em memória.
+ * Os dados serão perdidos quando o servidor for reiniciado.
+ */
 const tasks: Task[] = [];
 
-// Retorna todas as tarefas cadastradas
+/**
+ * Retorna todas as tarefas cadastradas.
+ *
+ * @returns Lista de tarefas.
+ */
 const getAllTasks = () => {
     return tasks;
 };
 
-// Cria e retorna uma nova tarefa
+/**
+ * Cria uma nova tarefa e a adiciona à lista de tarefas.
+ *
+ * @param title Título da tarefa.
+ * @param description Descrição da tarefa.
+ * @returns A tarefa criada.
+ */
 const createTask = (
     title: string,
     description: string
@@ -27,7 +40,33 @@ tasks.push(newTask);
 
 };
 
-export { getAllTasks,  createTask };
+/**
+ * Busca uma tarefa pelo seu ID.
+ * Retorna a tarefa encontrada ou undefined caso ela não exista.
+ */
+const getTaskById = (id: number) => {
+    return tasks.find(task => task.id === id)
+}
+
+const updateTask = (
+    id: number,
+    title: string,
+    description: string
+) => {
+    const task = getTaskById(id);
+
+    if (!task) {
+        return undefined;
+    }
+
+    task.title = title;
+    task.description = description;
+    task.updatedAt = new Date();
+
+    return task;
+}
+
+export { getAllTasks,  createTask, getTaskById, updateTask };
 
 
 

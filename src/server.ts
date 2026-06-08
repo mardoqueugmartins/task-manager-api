@@ -1,7 +1,5 @@
-
 import express from 'express';
-import { getAllTasks, createTask } from './services/task.service';
-import { title } from 'node:process';
+import { getAllTasks, createTask, getTaskById } from './services/task.service';
 
 // Cria aplicação
 const app = express();
@@ -26,6 +24,24 @@ app.post('/tasks', (req, res) => {
     );
     res.json(task);
 })
+
+app.get('/tasks/:id', (req, res) => {
+
+    const id = Number(req.params.id);
+    const task = getTaskById(id);
+    if (!task) {
+        return res.status(404).json({
+            message: 'Task not found'
+        });
+    }
+    res.json(task);
+
+});
+
+app.put('/tasks/:id', (req, res) => {
+    const task = updateTask(...);
+    res.json(task);
+});
 
 // Inicia o servidor
 app.listen(PORT, () => {
