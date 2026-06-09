@@ -1,6 +1,5 @@
 import express from 'express';
-import { getAllTasks, createTask, getTaskById, updateTask } from './services/task.service';
-import { title } from 'node:process';
+import { getAllTasks, createTask, getTaskById, updateTask, deleteTask } from './services/task.service';
 
 // Cria aplicação
 const app = express();
@@ -26,6 +25,7 @@ app.post('/tasks', (req, res) => {
     res.json(task);
 })
 
+// Pega a tarefa pelo ID
 app.get('/tasks/:id', (req, res) => {
 
     const id = Number(req.params.id);
@@ -39,6 +39,7 @@ app.get('/tasks/:id', (req, res) => {
 
 });
 
+// Atualiza a tarefa
 app.put('/tasks/:id', (req, res) => {
     const id = Number(req.params.id);
     const task = updateTask(
@@ -54,6 +55,21 @@ app.put('/tasks/:id', (req, res) => {
     }
 
     res.json(task);
+});
+
+// Deleta a tarefa
+app.delete('/tasks/:id', (req, res) => {
+
+    const id = Number(req.params.id);
+    const task = deleteTask(id);
+
+    if (!task) {
+        return res.status(404).json({
+            message: 'Task not found'
+        });
+    }
+    res.json(task);
+
 });
 
 // Inicia o servidor

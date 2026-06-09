@@ -74,7 +74,23 @@ const updateTask = (
     return task;
 }
 
-export { getAllTasks,  createTask, getTaskById, updateTask };
+const deleteTask = (id: number) => {
+    const task = getTaskById(id);
+
+    if (!task) {
+        return undefined;
+    }
+
+  const index = tasks.findIndex(
+        task => task.id === id
+    );
+
+    tasks.splice(index, 1);
+
+    return task;
+}
+
+export { getAllTasks,  createTask, getTaskById, updateTask, deleteTask };
 
 
 
