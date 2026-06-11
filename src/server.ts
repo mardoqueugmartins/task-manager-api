@@ -1,8 +1,10 @@
 import express from 'express';
 import { getAllTasks, createTask, getTaskById, updateTask, deleteTask } from './services/task.service';
+import cors from 'cors';
 
 // Cria aplicação
 const app = express();
+app.use(cors());
 app.use(express.json());
 // Define a porta
 const PORT = 3000;

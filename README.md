@@ -8,6 +8,7 @@ REST API for task management built with Node.js, Express and TypeScript. This pr
 * List all tasks
 * Get task by ID
 * Update tasks
+* Delete tasks
 
 ## Available Endpoints
 
