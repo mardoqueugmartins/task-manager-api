@@ -4,10 +4,17 @@ import cors from 'cors';
 
 // Cria aplicação
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://task-manager.vercel.app",
+    ],
+  }),
+);
 app.use(express.json());
 // Define a porta
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Cria uma rota GET
 app.get('/', (req, res) => {
@@ -44,11 +51,32 @@ app.get('/tasks/:id', (req, res) => {
 // Atualiza a tarefa
 app.put('/tasks/:id', (req, res) => {
     const id = Number(req.params.id);
-    const task = updateTask(
-      id,
-      req.body.title,
-      req.body.description
-    );
+    const updateData = {
+        title: req.body.title,
+        description: req.body.description
+    };
+      
+    const task = updateTask(id, updateData);
+
+    if (!task) {
+        return res.status(404).json({
+            message: 'Task not found'
+        });
+    }
+
+    res.json(task);
+});
+
+app.patch('/tasks/:id', (req, res) => {
+    const id = Number(req.params.id);
+    
+    const updateData = {
+        title: req.body.title,
+        description: req.body.description,
+        completed: req.body.completed
+    };
+
+    const task = updateTask(id, updateData);
 
     if (!task) {
         return res.status(404).json({

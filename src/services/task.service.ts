@@ -56,21 +56,22 @@ const getTaskById = (id: number) => {
  * @param description Nova descrição.
  * @returns A tarefa atualizada ou undefined caso não exista.
  */
-const updateTask = (
-    id: number,
-    title: string,
-    description: string
-) => {
+
+interface UpdateTaskData {
+    title?: string;
+    description?: string;
+    completed?: boolean;
+}
+
+const updateTask = (id: number, data: UpdateTaskData) => {
     const task = getTaskById(id);
+    if (!task) return undefined;
 
-    if (!task) {
-        return undefined;
-    }
-
-    task.title = title;
-    task.description = description;
+    if (data.title !== undefined) task.title = data.title;
+    if (data.description !== undefined) task.description = data.description;
+    if (data.completed !== undefined) task.completed = data.completed;
+    
     task.updatedAt = new Date();
-
     return task;
 }
 
