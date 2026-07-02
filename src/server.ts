@@ -8,7 +8,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://task-manager.vercel.app",
+      "https://task-manager-web-umber-five.vercel.app",
     ],
   }),
 );
