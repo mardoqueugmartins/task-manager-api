@@ -23,21 +23,23 @@ const getAllTasks = () => {
  * @returns A tarefa criada.
  */
 const createTask = (
-    title: string,
-    description: string
+  title: string,
+  description: string,
+  dueDate?: string,
 ) => {
-    const newTask: Task = {
+  const newTask: Task = {
     id: tasks.length + 1,
     title,
     description,
     completed: false,
+    dueDate,
     createdAt: new Date(),
-    updatedAt: new Date()
-};
+    updatedAt: new Date(),
+  };
 
-tasks.push(newTask);
-    return newTask;
+  tasks.push(newTask);
 
+  return newTask;
 };
 
 /**
@@ -61,6 +63,7 @@ interface UpdateTaskData {
     title?: string;
     description?: string;
     completed?: boolean;
+    dueDate?: string;
 }
 
 const updateTask = (id: number, data: UpdateTaskData) => {
@@ -70,6 +73,7 @@ const updateTask = (id: number, data: UpdateTaskData) => {
     if (data.title !== undefined) task.title = data.title;
     if (data.description !== undefined) task.description = data.description;
     if (data.completed !== undefined) task.completed = data.completed;
+    if (data.dueDate !== undefined) task.dueDate = data.dueDate;
     
     task.updatedAt = new Date();
     return task;

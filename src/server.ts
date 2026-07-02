@@ -29,10 +29,12 @@ app.get('/tasks', (req, res) => {
 app.post('/tasks', (req, res) => {
     const task = createTask(
         req.body.title,
-        req.body.description
+        req.body.description,
+        req.body.dueDate
     );
-    res.json(task);
-})
+
+    res.status(201).json(task);
+});
 
 // Pega a tarefa pelo ID
 app.get('/tasks/:id', (req, res) => {
@@ -52,9 +54,10 @@ app.get('/tasks/:id', (req, res) => {
 app.put('/tasks/:id', (req, res) => {
     const id = Number(req.params.id);
     const updateData = {
-        title: req.body.title,
-        description: req.body.description
-    };
+    title: req.body.title,
+    description: req.body.description,
+    dueDate: req.body.dueDate
+};
       
     const task = updateTask(id, updateData);
 
@@ -71,10 +74,11 @@ app.patch('/tasks/:id', (req, res) => {
     const id = Number(req.params.id);
     
     const updateData = {
-        title: req.body.title,
-        description: req.body.description,
-        completed: req.body.completed
-    };
+    title: req.body.title,
+    description: req.body.description,
+    completed: req.body.completed,
+    dueDate: req.body.dueDate
+};
 
     const task = updateTask(id, updateData);
 
